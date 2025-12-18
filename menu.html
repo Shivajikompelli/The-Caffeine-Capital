@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Menu | Roast – The Caffeine Capital</title>
+    <meta name="description" content="Explore our specialty coffee, artisanal bakery items, breakfast, sandwiches, pizzas, and desserts. Open 7AM to 1AM in Hitech City.">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <style>
+        .menu-hero {
+            background: linear-gradient(rgba(44, 24, 16, 0.8), rgba(44, 24, 16, 0.8)),
+                        url('https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80') center/cover no-repeat;
+            padding: 120px 0 60px;
+            color: white;
+            text-align: center;
+            margin-top: 80px;
+        }
+        
+        .menu-hero h1 {
+            color: white;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .menu-hero p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .menu-categories {
+            padding: 80px 0;
+            background-color: #F9F5F0;
+        }
+        
+        .menu-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+        
+        .menu-filter {
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid #E8D8C5;
+            border-radius: 30px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: #8B4513;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-filter:hover,
+        .menu-filter.active {
+            background: #8B4513;
+            color: white;
+            border-color: #8B4513;
+        }
+        
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .menu-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .menu-item-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .menu-item-content {
+            padding: 25px;
+        }
+        
+        .menu-item h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #2C1810;
+        }
+        
+        .menu-item p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #8B4513;
+        }
+        
+        .menu-item-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #D4A76A;
+            color: #2C1810;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .popular {
+            background: #FFD700;
+        }
+        
+        .menu-category-title {
+            grid-column: 1 / -1;
+            font-size: 2rem;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #D4A76A;
+            color: #2C1810;
+        }
+        
+        .menu-note {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background: #FFF8F0;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .menu-hero {
+                padding: 100px 20px 40px;
+            }
+            
+            .menu-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+            
+            .menu-filters {
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <h1>Roast <span class="subtitle">The Caffeine Capital</span></h1>
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="menu.html" class="nav-link active">Menu</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="ambience.html" class="nav-link">Ambience</a>
+                <a href="contact.html" class="nav-link">Visit</a>
+                <a href="contact.html#reservation" class="btn btn-secondary">Reserve Table</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Menu Hero -->
+    <section class="menu-hero">
+        <div class="container">
+            <h1>Our Menu</h1>
+            <p>At Roast, it's simple: great coffee deserves great food. Our menu is built for the long haul—from your first morning espresso to a late-night slice of cheesecake. Everything is prepared fresh, with our bakery working round the clock to bring you comfort classics and a few exotic delicacies.</p>
+        </div>
+    </section>
+
+    <!-- Menu Categories -->
+    <section class="menu-categories">
+        <div class="container">
+            <div class="menu-filters">
+                <button class="menu-filter active" data-category="all">All Items</button>
+                <button class="menu-filter" data-category="coffee">Coffee & Beverages</button>
+                <button class="menu-filter" data-category="breakfast">Breakfast & Eggs</button>
+                <button class="menu-filter" data-category="sandwiches">Burgers & Sandwiches</button>
+                <button class="menu-filter" data-category="pizza">Pizza & Pasta</button>
+                <button class="menu-filter" data-category="soups">Soups & Salads</button>
+                <button class="menu-filter" data-category="bakery">Bakery & Desserts</button>
+            </div>
+            
+            <div class="menu-items">
+                <!-- Coffee & Beverages -->
+                <h3 class="menu-category-title" id="coffee">Coffee & Beverages</h3>
+                
+                <div class="menu-item" data-category="coffee">
+                    <div class="menu-item-image" style="background-image: url('https://images.unsplash.com/photo-1498804103079-a6351b050096?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2068&q=80');"></div>
+                    <div class="menu-item-content">
+                        <h3>Signature Cold Brew Tonic</h3>
+                        <p>Our house cold brew with tonic water, served over ice with citrus peel for a refreshing twist.</p>
+                        <span class="price">₹289</span>
+                    </div>
+                    <div class="menu-item-badge popular">Most Popular</div>
+                </div>
+                
+                <div class="menu-item" data-category="coffee">
+                    <div class="menu-item-image" style="background-image: url('https://images.unsplash.com/photo-1517701604599-bb29b565090c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+                    <div class="menu-item-content">
+                        <h3>Caramel Macchiato</h3>
+                        <p>Rich espresso with steamed milk, vanilla syrup, and caramel drizzle. Available hot or iced.</p>
+                        <span class="price">₹299</span>
+                    </div>
+                </div>
+                
+                <div class="menu-item" data-category="coffee">
+                    <div class="menu-item-image" style="background-image: url('https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+                    <div class="menu-item-content">
+                        <h3>Chocolate Mint Cold Coffee</h3>
+                        <p>A decadent blend of cold brew, chocolate, fresh mint, and cream.</p>
+                        <span class="price">₹319</span>
+                    </div>
+                </div>
+                
+                <!-- Breakfast & Eggs -->
+                <h3 class="menu-category-title" id="breakfast">Breakfast & Eggs</h3>
+                
+                <div class="menu-item" data-category="breakfast">
+                    <div class="menu-item-image" style="background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+                    <div class="menu-item-content">
+                        <h3>Classic Eggs Benedict</h3>
+                        <p>Poached eggs on English muffins with Canadian bacon and hollandaise sauce.</p>
+                        <span class="price">₹349</span>
+                    </div>
+                </div>
+                
+                <div class="menu-item" data-category="breakfast">
+                    <div class="menu-item-image" style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80');"></div>
+                    <div class="menu-item-content">
+                        <h3>Avocado & Feta Toast</h3>
+                        <p>Smashed avocado on artisanal sourdough with feta, chili flakes, and microgreens.</p>
+                        <span class="price">₹329</span>
+                    </div>
+                </div>
+                
+                <!-- Burgers & Sandwiches -->
+                <h3 class="menu-category-title" id="sandwiches">Burgers & Sandwiches</h3>
+                
+                <div class="menu-item" data-category="sandwiches">
+                    <div class="menu-item-image" style="background-image: url('https://images.unsplash.com/photo-1528735602780-2552fd46c7af?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');"></div>
+                    <div class="menu-item-content">
+                        <h3>Grilled Three-Cheese Sandwich with Sriracha</h3>
+                        <p>Melty cheddar, mozzarella, and gouda with a spicy sriracha kick on sourdough.</p>
+                        <span class="price">₹339</span>
+                    </div>
+                    <div class="menu-item-badge popular">Signature</div>
+                </div>
+                
+                <div class="menu-item" data-category="sandwiches">
+                    <div class="menu-item-image" style="background-image: url('https://images.unsplash.com/photo-1522948532831-6b4c798b9e82?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+                    <div class="menu-item-content">
+                        <h3>The PB&J Sandwich</h3>
+                        <p>A nostalgic classic reimagined with artisanal peanut butter and house-made berry compote.</p>
+                        <span class="price">₹299</span>
+                    </div>
+                </div>
+                
+                <!-- Pizza & Pasta -->
+                <h3 class="menu-category-title" id="pizza">Pizza & Pasta</h3>
+                
+                <div class="menu-item" data-category="pizza">
+                    <div class="menu-item-image" style="background-image: url('https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80');"></div>
+                    <div class="menu-item-content">
+                        <h3>Margherita Pizza</h3>
+                        <p>Classic Neapolitan-style pizza with San Marzano tomatoes, fresh mozzarella, and basil.</p>
+                        <span class="price">₹379</span>
+                    </div>
+                </div>
+                
+                <!-- Soups & Salads -->
+                <h3 class="menu-category-title" id="soups">Soups & Salads</h3>
+                
+                <div class="menu-item" data-category="soups">
+                    <div class="menu-item-image" style="background-image: url('https://images.unsplash.com/photo-1547592166-23ac45744acd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');"></div>
+                    <div class="menu-item-content">
+                        <h3>Classic Tomato & Basil Bruschetta</h3>
+                        <p>Fresh tomatoes, fragrant basil, and extra virgin olive oil on toasted artisanal bread.</p>
+                        <span class="price">₹279</span>
+                    </div>
+                    <div class="menu-item-badge">Fresh</div>
+                </div>
+                
+                <!-- Bakery & Desserts -->
+                <h3 class="menu-category-title" id="bakery">Bakery & Desserts</h3>
+                
+                <div class="menu-item" data-category="bakery">
+                    <div class="menu-item-image" style="background-image: url('https://images.unsplash.com/photo-1568254183919-78a4f43a2877?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80');"></div>
+                    <div class="menu-item-content">
+                        <h3>Chocolate Croissant</h3>
+                        <p>Buttery, flaky layers with rich dark chocolate filling. Baked fresh throughout the day.</p>
+                        <span class="price">₹189</span>
+                    </div>
+                    <div class="menu-item-badge popular">Best Seller</div>
+                </div>
+                
+                <div class="menu-item" data-category="bakery">
+                    <div class="menu-item-image" style="background-image: url('https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2068&q=80');"></div>
+                    <div class="menu-item-content">
+                        <h3>Lotus Biscoff Cheesecake</h3>
+                        <p>Our signature dessert. A creamy, no-bake cheesecake on a spiced Biscoff cookie base.</p>
+                        <span class="price">₹349</span>
+                    </div>
+                    <div class="menu-item-badge popular">Iconic</div>
+                </div>
+                
+                <div class="menu-item" data-category="bakery">
+                    <div class="menu-item-image" style="background-image: url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2089&q=80');"></div>
+                    <div class="menu-item-content">
+                        <h3>New York–Style Cheesecake</h3>
+                        <p>Classic dense cheesecake with a graham cracker crust and berry compote.</p>
+                        <span class="price">₹329</span>
+                    </div>
+                </div>
+                
+                <div class="menu-note">
+                    <p><strong>Note:</strong> Prices are inclusive of GST. A 5% SGST will be applicable on the bill. Our menu is seasonal and may change. Please ask your server for daily specials and recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Hungry yet? We recommend reserving your table for peak hours.</h2>
+            <div class="cta-buttons">
+                <a href="contact.html#reservation" class="btn btn-primary">Reserve a Table</a>
+                <a href="https://swiggy.com" class="btn btn-outline" target="_blank">Order Online</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Roast – The Caffeine Capital</h3>
+                    <p>Specialty coffee & artisanal bakery in the heart of Hitech City, Hyderabad.</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/roastcafe.in" aria-label="Instagram" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="ambience.html">Gallery</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Visit</h4>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt"></i> Plot No.1, 82/84, Hitech City Main Road,<br>HUDA Techno Enclave, near Deccan Serai,<br>Hitech City, Hyderabad</p>
+                        <p><i class="fas fa-clock"></i> 7:00 AM – 1:00 AM | All Days</p>
+                        <p><i class="fas fa-phone"></i> +91 40 1234 5678</p>
+                    </address>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Order Online</h4>
+                    <div class="delivery-links">
+                        <a href="https://swiggy.com" class="delivery-btn swiggy" target="_blank">
+                            <i class="fas fa-utensils"></i> Order via Swiggy
+                        </a>
+                        <a href="https://zomato.com" class="delivery-btn zomato" target="_blank">
+                            <i class="fas fa-motorcycle"></i> Order via Zomato
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Roast – The Caffeine Capital. All rights reserved.</p>
+                <p>Average cost for two: ₹1,300 (including taxes)</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Menu filtering functionality
+        const menuFilters = document.querySelectorAll('.menu-filter');
+        const menuItems = document.querySelectorAll('.menu-item');
+        
+        menuFilters.forEach(filter => {
+            filter.addEventListener('click', () => {
+                // Remove active class from all filters
+                menuFilters.forEach(f => f.classList.remove('active'));
+                // Add active class to clicked filter
+                filter.classList.add('active');
+                
+                const category = filter.getAttribute('data-category');
+                
+                // Show all category titles first
+                document.querySelectorAll('.menu-category-title').forEach(title => {
+                    title.style.display = 'block';
+                });
+                
+                // Show/hide menu items based on category
+                menuItems.forEach(item => {
+                    if (category === 'all') {
+                        item.style.display = 'block';
+                    } else {
+                        const itemCategory = item.getAttribute('data-category');
+                        if (itemCategory === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    }
+                });
+                
+                // Show only relevant category titles
+                if (category !== 'all') {
+                    document.querySelectorAll('.menu-category-title').forEach(title => {
+                        if (title.id !== category) {
+                            title.style.display = 'none';
+                        }
+                    });
+                }
+                
+                // Smooth scroll to top of menu section
+                document.querySelector('.menu-categories').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

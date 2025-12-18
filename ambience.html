@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambience & Gallery | Roast – The Caffeine Capital</title>
+    <meta name="description" content="Explore the Instagram-worthy interiors, cozy work-friendly spaces, and beautiful outdoor seating at Roast in Hitech City.">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <style>
+        .ambience-hero {
+            background: linear-gradient(rgba(44, 24, 16, 0.85), rgba(44, 24, 16, 0.85)),
+                        url('https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80') center/cover no-repeat;
+            padding: 140px 0 80px;
+            color: white;
+            text-align: center;
+            margin-top: 80px;
+        }
+        
+        .ambience-hero h1 {
+            color: white;
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .ambience-hero p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+        
+        .intro-section {
+            padding: 80px 0;
+            background-color: white;
+            text-align: center;
+        }
+        
+        .intro-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .intro-container h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: #2C1810;
+        }
+        
+        .intro-container p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 40px;
+        }
+        
+        .experience-quote {
+            font-style: italic;
+            font-size: 1.4rem;
+            padding: 30px;
+            background: #F9F5F0;
+            border-radius: 15px;
+            margin: 50px 0;
+            color: #8B4513;
+            border-left: 5px solid #D4A76A;
+        }
+        
+        .gallery-section {
+            padding: 80px 0;
+            background-color: #F9F5F0;
+        }
+        
+        .gallery-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #2C1810;
+        }
+        
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .gallery-item-large {
+            grid-column: span 2;
+        }
+        
+        @media (max-width: 1100px) {
+            .gallery-item-large {
+                grid-column: span 1;
+            }
+        }
+        
+        .gallery-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 350px;
+            background-size: cover;
+            background-position: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .gallery-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 25px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-card:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        .gallery-overlay h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .gallery-overlay p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+            padding: 0 20px;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 40px 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: #8B4513;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+        }
+        
+        .feature-icon i {
+            font-size: 1.8rem;
+            color: white;
+        }
+        
+        .feature-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #2C1810;
+        }
+        
+        .feature-item p {
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        @media (max-width: 768px) {
+            .ambience-hero {
+                padding: 100px 20px 40px;
+            }
+            
+            .ambience-hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-card {
+                height: 300px;
+            }
+            
+            .intro-container h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <h1>Roast <span class="subtitle">The Caffeine Capital</span></h1>
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="menu.html" class="nav-link">Menu</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="ambience.html" class="nav-link active">Ambience</a>
+                <a href="contact.html" class="nav-link">Visit</a>
+                <a href="contact.html#reservation" class="btn btn-secondary">Reserve Table</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Ambience Hero -->
+    <section class="ambience-hero">
+        <div class="container">
+            <h1>Step Into Your Space</h1>
+            <p>Experience the modern, cozy, and Instagram-worthy interiors that make Roast more than just a café.</p>
+        </div>
+    </section>
+
+    <!-- Intro Section -->
+    <section class="intro-section">
+        <div class="intro-container">
+            <h2>Designed For How You Live</h2>
+            <p>Roast blends modern aesthetics with cozy comfort, creating an environment that's as photogenic as it is practical. Whether you're drawn to the buzz of our indoor seating or the fresh air of our outdoor nook, every corner is an invitation to stay a while.</p>
+            
+            <div class="experience-quote">
+                "This is what 4.2 stars feel like. It's the comfort of knowing you have a seat from breakfast until late night. It's the 'wow' of a perfectly layered cheesecake arriving at your table. It's the quiet buzz of a productive space. This is the Roast ambience."
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <h2 class="gallery-title">The Roast Experience</h2>
+        
+        <div class="gallery-container">
+            <!-- Gallery Item 1 -->
+            <div class="gallery-card gallery-item-large" style="background-image: url('https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');">
+                <div class="gallery-overlay">
+                    <h3>Spacious & Modern</h3>
+                    <p>Bathed in natural light with comfortable seating, our interior provides the perfect backdrop for your day—whether you're working or winding down.</p>
+                </div>
+            </div>
+            
+            <!-- Gallery Item 2 -->
+            <div class="gallery-card" style="background-image: url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2047&q=80');">
+                <div class="gallery-overlay">
+                    <h3>Every Detail Matters</h3>
+                    <p>From the latte art to the plating, we believe beauty enhances the experience. Instagram-worthy moments at every table.</p>
+                </div>
+            </div>
+            
+            <!-- Gallery Item 3 -->
+            <div class="gallery-card" style="background-image: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
+                <div class="gallery-overlay">
+                    <h3>The Coffee Bar</h3>
+                    <p>Where the magic begins. Watch our expert baristas craft your perfect cup with precision and passion.</p>
+                </div>
+            </div>
+            
+            <!-- Gallery Item 4 -->
+            <div class="gallery-card" style="background-image: url('https://images.unsplash.com/photo-1510820587927-0fea2b8d7c1f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
+                <div class="gallery-overlay">
+                    <h3>Find Your Corner</h3>
+                    <p>Cozy nooks with plush seating provide the ideal setting for deep work or deeper conversations.</p>
+                </div>
+            </div>
+            
+            <!-- Gallery Item 5 -->
+            <div class="gallery-card" style="background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
+                <div class="gallery-overlay">
+                    <h3>Outdoor Serenity</h3>
+                    <p>Our open-air seating lets you enjoy Hyderabad evenings with a cold brew in hand, surrounded by gentle lighting.</p>
+                </div>
+            </div>
+            
+            <!-- Gallery Item 6 -->
+            <div class="gallery-card" style="background-image: url('https://images.unsplash.com/photo-1498804103079-a6351b050096?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2068&q=80');">
+                <div class="gallery-overlay">
+                    <h3>The Remote HQ</h3>
+                    <p>The unofficial headquarters for Hitech City's remote workers, freelancers, and creatives.</p>
+                </div>
+            </div>
+            
+            <!-- Gallery Item 7 -->
+            <div class="gallery-card" style="background-image: url('https://images.unsplash.com/photo-1567306301408-9b74779a11af?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
+                <div class="gallery-overlay">
+                    <h3>Celebration Central</h3>
+                    <p>From coffee dates to celebratory cakes, we're here for all your special moments.</p>
+                </div>
+            </div>
+            
+            <!-- Gallery Item 8 -->
+            <div class="gallery-card" style="background-image: url('https://images.unsplash.com/photo-1568254183919-78a4f43a2877?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80');">
+                <div class="gallery-overlay">
+                    <h3>Take Home The Experience</h3>
+                    <p>Love our coffee? Browse our selection of retail beans and merchandise to bring The Caffeine Capital home with you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="intro-section">
+        <div class="intro-container">
+            <h2>Designed With You In Mind</h2>
+            <p>Every aspect of Roast is thoughtfully designed to enhance your experience, whether you're here for 30 minutes or 5 hours.</p>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h3>High-Speed WiFi</h3>
+                    <p>Stay connected with our reliable, high-speed internet, perfect for video calls and large uploads.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h3>Ample Charging Points</h3>
+                    <p>Power outlets at every table and charging stations throughout the café for all your devices.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-volume-mute"></i>
+                    </div>
+                    <h3>Acoustically Designed</h3>
+                    <p>Perfect noise levels—energetic but not overwhelming, allowing for both focus and conversation.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Natural Elements</h3>
+                    <p>Live plants, natural light, and sustainable materials create a calming, refreshing atmosphere.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox">
+        <button class="lightbox-close">&times;</button>
+        <img class="lightbox-img" src="" alt="">
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>See it for yourself.</h2>
+            <div class="cta-buttons">
+                <a href="contact.html#directions" class="btn btn-primary">Find Us on Hitech City Road</a>
+                <a href="contact.html#reservation" class="btn btn-outline">Book Your Spot</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Roast – The Caffeine Capital</h3>
+                    <p>Specialty coffee & artisanal bakery in the heart of Hitech City, Hyderabad.</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/roastcafe.in" aria-label="Instagram" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="contact.html">Visit Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Visit</h4>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt"></i> Plot No.1, 82/84, Hitech City Main Road,<br>HUDA Techno Enclave, near Deccan Serai,<br>Hitech City, Hyderabad</p>
+                        <p><i class="fas fa-clock"></i> 7:00 AM – 1:00 AM | All Days</p>
+                        <p><i class="fas fa-phone"></i> +91 40 1234 5678</p>
+                    </address>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Order Online</h4>
+                    <div class="delivery-links">
+                        <a href="https://swiggy.com" class="delivery-btn swiggy" target="_blank">
+                            <i class="fas fa-utensils"></i> Order via Swiggy
+                        </a>
+                        <a href="https://zomato.com" class="delivery-btn zomato" target="_blank">
+                            <i class="fas fa-motorcycle"></i> Order via Zomato
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Roast – The Caffeine Capital. All rights reserved.</p>
+                <p>Average cost for two: ₹1,300 (including taxes)</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Lightbox functionality
+        const galleryCards = document.querySelectorAll('.gallery-card');
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImg = document.querySelector('.lightbox-img');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        
+        galleryCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const bgImage = card.style.backgroundImage;
+                const imageUrl = bgImage.replace('url("', '').replace('")', '');
+                lightboxImg.src = imageUrl;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>
